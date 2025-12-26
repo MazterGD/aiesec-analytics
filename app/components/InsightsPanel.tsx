@@ -52,7 +52,6 @@ export default function InsightsPanel({ insights }: InsightsPanelProps) {
       }}
     >
       <div className="flex items-center gap-2 mb-4">
-        <Lightbulb className="w-5 h-5 text-amber-500" />
         <h3 className="text-lg font-semibold text-gray-900">
           Analytics Insights
         </h3>

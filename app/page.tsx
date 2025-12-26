@@ -265,8 +265,8 @@ export default function AnalyticsDashboard() {
 
   return (
     <div className="min-h-screen" style={{ background: "#f8f5f1" }}>
-      {/* Header - Dark themed like reference */}
-      <header className="sticky top-0 z-50" style={{ background: "#1a1a2e" }}>
+      {/* Header */}
+      <header className="sticky top-0 z-50" style={{ background: "#ffffff" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -277,10 +277,10 @@ export default function AnalyticsDashboard() {
                 <BarChart3 className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-semibold tracking-tight text-white">
+                <h1 className="text-xl font-semibold tracking-tight">
                   AIESEC Analytics
                 </h1>
-                <p className="text-sm text-gray-400">
+                <p className="text-sm text-gray-700">
                   Exchange Performance Dashboard
                 </p>
               </div>
@@ -288,11 +288,11 @@ export default function AnalyticsDashboard() {
 
             {isUsingDemoData && (
               <div
-                className="flex items-center gap-2 px-4 py-2 rounded-full border border-gray-600"
+                className="flex items-center gap-2 px-4 py-2 rounded-full border border-orange-600"
                 style={{ background: "transparent" }}
               >
-                <AlertCircle className="w-4 h-4 text-gray-400" />
-                <span className="text-sm font-medium text-gray-300">
+                <AlertCircle className="w-4 h-4 text-orange-500" />
+                <span className="text-sm font-medium text-orange-500">
                   Demo Data
                 </span>
               </div>
