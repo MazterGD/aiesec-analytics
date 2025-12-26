@@ -55,6 +55,7 @@ export interface AnalyticsInsight {
   description: string;
   value?: string | number;
   change?: number;
+  equation?: string;
 }
 
 export interface TrendAnalysis {

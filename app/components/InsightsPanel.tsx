@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { AnalyticsInsight } from "../types/analytics";
 import {
   TrendingUp,
@@ -8,6 +9,7 @@ import {
   CheckCircle,
   Info,
   Lightbulb,
+  Calculator,
 } from "lucide-react";
 
 interface InsightsPanelProps {
@@ -15,6 +17,8 @@ interface InsightsPanelProps {
 }
 
 export default function InsightsPanel({ insights }: InsightsPanelProps) {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   const getInsightIcon = (type: AnalyticsInsight["type"]) => {
     switch (type) {
       case "positive":
@@ -55,6 +59,9 @@ export default function InsightsPanel({ insights }: InsightsPanelProps) {
         <h3 className="text-lg font-semibold text-gray-900">
           Analytics Insights
         </h3>
+        <span className="text-xs text-gray-400 flex items-center gap-1">
+          <Calculator className="w-3 h-3" /> Hover for formulas
+        </span>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -63,11 +70,13 @@ export default function InsightsPanel({ insights }: InsightsPanelProps) {
           return (
             <div
               key={index}
-              className="p-4 rounded-2xl"
+              className="relative p-4 rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
               style={{
                 background: styles.bg,
                 border: `1px solid ${styles.border}`,
               }}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
             >
               <div className="flex items-start gap-3">
                 <div className="flex-shrink-0 mt-0.5">
@@ -113,6 +122,20 @@ export default function InsightsPanel({ insights }: InsightsPanelProps) {
                   )}
                 </div>
               </div>
+
+              {/* Equation tooltip on hover */}
+              {hoveredIndex === index && insight.equation && (
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 z-20 bg-gray-900 text-white text-xs rounded-lg px-4 py-3 shadow-xl max-w-xs">
+                  <div className="flex items-center gap-2 font-medium mb-1">
+                    <Calculator className="w-3.5 h-3.5" />
+                    Formula
+                  </div>
+                  <div className="text-gray-200 break-words">
+                    {insight.equation}
+                  </div>
+                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
+                </div>
+              )}
             </div>
           );
         })}

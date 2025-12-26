@@ -95,7 +95,7 @@ export default function FilterPanel({
           <button
             onClick={onApply}
             disabled={isLoading}
-            className="w-full px-6 py-3 font-medium rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-60 text-white hover:opacity-90"
+            className="w-full px-6 py-3 font-medium rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-60 text-white hover:opacity-90 hover:cursor-pointer"
             style={{ background: "#037EF3" }}
           >
             {isLoading ? (

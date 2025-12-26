@@ -46,6 +46,16 @@ export default function ComparativeChart({ data }: ComparativeChartProps) {
 
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
+      const applications =
+        payload.find((p: any) => p.dataKey === "total_applications")?.value ||
+        0;
+      const matched =
+        payload.find((p: any) => p.dataKey === "total_matched")?.value || 0;
+      const realized =
+        payload.find((p: any) => p.dataKey === "total_realized")?.value || 0;
+      const completed =
+        payload.find((p: any) => p.dataKey === "total_completed")?.value || 0;
+
       return (
         <div
           className="rounded-xl shadow-lg p-4 bg-white"
@@ -57,25 +67,19 @@ export default function ComparativeChart({ data }: ComparativeChartProps) {
             <div className="text-sm">
               <span className="text-gray-500">Applications: </span>
               <span className="font-medium text-blue-600">
-                {payload
-                  .find((p: any) => p.dataKey === "total_applications")
-                  ?.value?.toLocaleString() || 0}
+                {applications?.toLocaleString() || 0}
               </span>
             </div>
             <div className="text-sm">
               <span className="text-gray-500">Realized: </span>
               <span className="font-medium text-amber-600">
-                {payload
-                  .find((p: any) => p.dataKey === "total_realized")
-                  ?.value?.toLocaleString() || 0}
+                {realized?.toLocaleString() || 0}
               </span>
             </div>
             <div className="text-sm">
               <span className="text-gray-500">Completed: </span>
               <span className="font-medium text-green-600">
-                {payload
-                  .find((p: any) => p.dataKey === "total_completed")
-                  ?.value?.toLocaleString() || 0}
+                {completed?.toLocaleString() || 0}
               </span>
             </div>
 
@@ -86,6 +90,9 @@ export default function ComparativeChart({ data }: ComparativeChartProps) {
               <span className="font-medium text-purple-600">
                 {payload.find((p: any) => p.dataKey === "matchRate")?.value}%
               </span>
+              <span className="text-xs text-gray-400 block">
+                = (Matched ÷ Applications) × 100
+              </span>
             </div>
             <div className="text-sm">
               <span className="text-gray-500">Completion Rate: </span>
@@ -95,6 +102,9 @@ export default function ComparativeChart({ data }: ComparativeChartProps) {
                     ?.value
                 }
                 %
+              </span>
+              <span className="text-xs text-gray-400 block">
+                = (Completed ÷ Realized) × 100
               </span>
             </div>
           </div>

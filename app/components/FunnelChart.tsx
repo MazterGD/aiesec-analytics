@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
   BarChart,
   Bar,
@@ -20,6 +21,7 @@ interface FunnelChartProps {
 }
 
 export default function FunnelChart({ data }: FunnelChartProps) {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const maxValue = Math.max(...data.map((d) => d.value));
 
   const CustomTooltip = ({ active, payload }: any) => {
@@ -41,6 +43,10 @@ export default function FunnelChart({ data }: FunnelChartProps) {
           <p className="text-sm text-gray-500">
             Ratio: <span className="font-medium">{percentage}%</span>
           </p>
+          <p className="text-xs text-gray-400 mt-1 italic">
+            Formula: ({item.value.toLocaleString()} ÷{" "}
+            {maxValue.toLocaleString()}) × 100
+          </p>
         </div>
       );
     }
@@ -59,12 +65,12 @@ export default function FunnelChart({ data }: FunnelChartProps) {
         Exchange Funnel
       </h3>
 
-      <div className="h-80">
+      <div className="h-96">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={data}
             layout="vertical"
-            margin={{ top: 5, right: 80, left: 80, bottom: 5 }}
+            margin={{ top: 5, right: 80, left: 100, bottom: 5 }}
           >
             <XAxis
               type="number"
@@ -75,7 +81,7 @@ export default function FunnelChart({ data }: FunnelChartProps) {
               type="category"
               dataKey="stage"
               tick={{ fill: "#6b7280", fontSize: 12 }}
-              width={80}
+              width={95}
             />
             <Tooltip content={<CustomTooltip />} />
             <Bar dataKey="value" radius={[0, 4, 4, 0]}>
@@ -97,8 +103,8 @@ export default function FunnelChart({ data }: FunnelChartProps) {
         </ResponsiveContainer>
       </div>
 
-      {/* Conversion rates */}
-      <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-3">
+      {/* Conversion rates with hover tooltips */}
+      <div className="mt-4 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-2">
         {data.slice(1).map((item, index) => {
           const prevValue = data[index].value;
           const convRate =
@@ -107,10 +113,12 @@ export default function FunnelChart({ data }: FunnelChartProps) {
           return (
             <div
               key={item.stage}
-              className="text-center p-3 rounded-xl"
+              className="relative text-center p-3 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-md"
               style={{ backgroundColor: `${item.color}15` }}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
             >
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-gray-500 truncate">
                 {data[index].stage} → {item.stage}
               </p>
               <p
@@ -119,6 +127,18 @@ export default function FunnelChart({ data }: FunnelChartProps) {
               >
                 {convRate}%
               </p>
+
+              {/* Hover tooltip showing equation */}
+              {hoveredIndex === index && (
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 z-10 bg-gray-900 text-white text-xs rounded-lg px-3 py-2 whitespace-nowrap shadow-lg">
+                  <div className="font-medium mb-1">Conversion Rate</div>
+                  <div className="text-gray-300">
+                    ({item.value.toLocaleString()} ÷{" "}
+                    {prevValue.toLocaleString()}) × 100 = {convRate}%
+                  </div>
+                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
+                </div>
+              )}
             </div>
           );
         })}

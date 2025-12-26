@@ -102,6 +102,7 @@ export function generateInsights(
       2
     )}% of applications convert to realized exchanges`,
     value: `${conversionRate.toFixed(2)}%`,
+    equation: `(Realized ÷ Applications) × 100 = (${totalRealized.toLocaleString()} ÷ ${totalApps.toLocaleString()}) × 100`,
   });
 
   // Completion Rate
@@ -121,6 +122,7 @@ export function generateInsights(
       1
     )}% of realized exchanges are finished`,
     value: `${completionRate.toFixed(1)}%`,
+    equation: `(Finished ÷ Realized) × 100 = (${totalFinished.toLocaleString()} ÷ ${totalRealized.toLocaleString()}) × 100`,
   });
 
   // Match Rate
@@ -132,6 +134,7 @@ export function generateInsights(
     title: "Match Rate",
     description: `${matchRate.toFixed(2)}% of applications get matched`,
     value: `${matchRate.toFixed(2)}%`,
+    equation: `(Matched ÷ Applications) × 100 = (${totalMatched.toLocaleString()} ÷ ${totalApps.toLocaleString()}) × 100`,
   });
 
   // Trend Analysis for Applications
@@ -149,6 +152,7 @@ export function generateInsights(
         appsTrend.percentChange
       )}% change`,
       change: appsTrend.percentChange,
+      equation: `Trend % = ((Recent Avg - Previous Avg) ÷ Previous Avg) × 100`,
     });
   }
 
@@ -160,6 +164,7 @@ export function generateInsights(
       title: "Peak Performance",
       description: `Highest realized exchanges (${realizedTrend.max.value}) occurred in ${realizedTrend.max.date}`,
       value: realizedTrend.max.value,
+      equation: `Maximum value from time series data`,
     });
   }
 
@@ -176,6 +181,7 @@ export function generateInsights(
       1
     )}% of approvals convert to realizations`,
     value: `${approvalToRealizationRate.toFixed(1)}%`,
+    equation: `(Realized ÷ Approvals) × 100 = (${totalRealized.toLocaleString()} ÷ ${approvals.toLocaleString()}) × 100`,
   });
 
   // Sign-up to Application ratio
@@ -189,6 +195,7 @@ export function generateInsights(
       1
     )} applications`,
     value: signupToAppRatio.toFixed(1),
+    equation: `Applications ÷ Sign-ups = ${totalApps.toLocaleString()} ÷ ${signups.toLocaleString()}`,
   });
 
   return insights;
@@ -197,9 +204,9 @@ export function generateInsights(
 export function calculateFunnelData(analytics: AnalyticsResponse) {
   return [
     {
-      stage: "Applications",
-      value: analytics.analytics.total_applications?.doc_count || 0,
-      color: "#3b82f6",
+      stage: "Sign-ups",
+      value: analytics.analytics.total_signup?.doc_count || 0,
+      color: "#6366f1",
     },
     {
       stage: "Matched",
@@ -207,14 +214,19 @@ export function calculateFunnelData(analytics: AnalyticsResponse) {
       color: "#8b5cf6",
     },
     {
+      stage: "Applications",
+      value: analytics.analytics.total_applications?.doc_count || 0,
+      color: "#3b82f6",
+    },
+    {
+      stage: "Accepted by Host",
+      value: analytics.analytics.total_an_accepted?.doc_count || 0,
+      color: "#10b981",
+    },
+    {
       stage: "Approvals",
       value: analytics.analytics.total_approvals?.doc_count || 0,
       color: "#06b6d4",
-    },
-    {
-      stage: "AN Accepted",
-      value: analytics.analytics.total_an_accepted?.doc_count || 0,
-      color: "#10b981",
     },
     {
       stage: "Realized",

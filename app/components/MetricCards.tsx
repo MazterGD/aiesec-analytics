@@ -51,15 +51,18 @@ export default function MetricCards({ analytics }: MetricCardsProps) {
   };
 
   const mainMetrics = [
-    "total_applications",
-    "total_matched",
-    "total_realized",
-    "total_completed",
     "total_signup",
+    "total_matched",
+    "total_applications",
+    "total_an_accepted",
+    "total_approvals",
+    "total_realized",
+    "total_finished",
+    "total_completed",
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
+    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3 mb-6">
       {mainMetrics.map((metricKey) => {
         const config = METRIC_CONFIGS.find((m) => m.key === metricKey);
         const metricData =
@@ -74,11 +77,12 @@ export default function MetricCards({ analytics }: MetricCardsProps) {
         return (
           <div
             key={metricKey}
-            className="rounded-3xl p-5 transition-all hover:translate-y-[-2px] bg-white"
+            className="group rounded-2xl p-4 transition-all duration-300 hover:translate-y-[-4px] hover:shadow-xl bg-white"
             style={{
               border: "1px solid #e8e4df",
               boxShadow: "0 4px 20px rgba(0, 0, 0, 0.03)",
             }}
+            title={config.description}
           >
             <div className="flex items-center justify-between mb-3">
               <div

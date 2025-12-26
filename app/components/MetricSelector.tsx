@@ -64,14 +64,15 @@ export default function MetricSelector({
             <button
               key={metric.key}
               onClick={() => toggleMetric(metric.key)}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-full transition-all border-2"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-full transition-all duration-200 border-2 hover:scale-105 hover:shadow-md"
               style={{
                 backgroundColor: isSelected ? `${metric.color}15` : "#f9fafb",
                 borderColor: isSelected ? metric.color : "transparent",
               }}
+              title={metric.description}
             >
               <div
-                className="w-2.5 h-2.5 rounded-full"
+                className="w-2.5 h-2.5 rounded-full transition-transform duration-200 group-hover:scale-125"
                 style={{ backgroundColor: metric.color }}
               />
               <span
