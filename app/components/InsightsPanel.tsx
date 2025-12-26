@@ -8,8 +8,6 @@ import {
   AlertTriangle,
   CheckCircle,
   Info,
-  Lightbulb,
-  Calculator,
 } from "lucide-react";
 
 interface InsightsPanelProps {
@@ -59,9 +57,6 @@ export default function InsightsPanel({ insights }: InsightsPanelProps) {
         <h3 className="text-lg font-semibold text-gray-900">
           Analytics Insights
         </h3>
-        <span className="text-xs text-gray-400 flex items-center gap-1">
-          <Calculator className="w-3 h-3" /> Hover for formulas
-        </span>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -126,10 +121,6 @@ export default function InsightsPanel({ insights }: InsightsPanelProps) {
               {/* Equation tooltip on hover */}
               {hoveredIndex === index && insight.equation && (
                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 z-20 bg-gray-900 text-white text-xs rounded-lg px-4 py-3 shadow-xl max-w-xs">
-                  <div className="flex items-center gap-2 font-medium mb-1">
-                    <Calculator className="w-3.5 h-3.5" />
-                    Formula
-                  </div>
                   <div className="text-gray-200 break-words">
                     {insight.equation}
                   </div>

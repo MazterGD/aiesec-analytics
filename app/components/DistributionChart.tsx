@@ -159,8 +159,20 @@ export default function DistributionChart({
               layout="horizontal"
               verticalAlign="bottom"
               align="center"
-              formatter={(value) => (
-                <span className="text-sm text-gray-600">{value}</span>
+              content={({ payload }) => (
+                <div className="flex flex-wrap justify-center gap-4 mt-4">
+                  {payload?.map((entry, index) => (
+                    <div key={index} className="flex items-center gap-2">
+                      <div
+                        className="w-3 h-3 rounded-full"
+                        style={{ backgroundColor: entry.color }}
+                      />
+                      <span className="text-sm text-gray-600">
+                        {entry.value}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               )}
             />
           </PieChart>

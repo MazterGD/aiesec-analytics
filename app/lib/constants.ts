@@ -38,6 +38,12 @@ export const METRIC_CONFIGS: MetricConfig[] = [
     description: "Exchanges that have been realized (started)",
   },
   {
+    key: "total_remote_realized",
+    label: "Remote Realized",
+    color: "#ec4899",
+    description: "Remote exchanges that have been realized",
+  },
+  {
     key: "total_finished",
     label: "Finished",
     color: "#ef4444",
@@ -48,12 +54,6 @@ export const METRIC_CONFIGS: MetricConfig[] = [
     label: "Completed",
     color: "#22c55e",
     description: "Exchanges that have been completed successfully",
-  },
-  {
-    key: "total_remote_realized",
-    label: "Remote Realized",
-    color: "#ec4899",
-    description: "Remote exchanges that have been realized",
   },
 ];
 

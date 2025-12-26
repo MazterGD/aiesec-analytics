@@ -47,6 +47,7 @@ export default function TrendAnalysisTable({ data }: TrendAnalysisTableProps) {
   };
 
   const HEADER_EQUATIONS: Record<string, string> = {
+    trend: "Based on comparing recent vs previous period averages",
     change: "((Recent Avg - Previous Avg) ÷ Previous Avg) × 100",
     average: "Sum of all values ÷ Number of periods",
     peak: "Maximum value in the selected time range",
@@ -72,8 +73,22 @@ export default function TrendAnalysisTable({ data }: TrendAnalysisTableProps) {
               <th className="text-left py-3 px-4 text-sm font-medium text-gray-500">
                 Metric
               </th>
-              <th className="text-center py-3 px-4 text-sm font-medium text-gray-500">
-                Trend
+              <th
+                className="text-center py-3 px-4 text-sm font-medium text-gray-500 relative cursor-help"
+                onMouseEnter={() => setHoveredHeader("trend")}
+                onMouseLeave={() => setHoveredHeader(null)}
+              >
+                <span className="border-b border-dashed border-gray-400">
+                  Trend
+                </span>
+                {hoveredHeader === "trend" && (
+                  <div className="absolute left-1/2 transform -translate-x-1/2 top-full mt-1 z-10 bg-gray-900 text-white text-xs rounded-lg px-3 py-2 whitespace-nowrap shadow-lg">
+                    <div className="text-gray-300 font-normal">
+                      {HEADER_EQUATIONS.trend}
+                    </div>
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-b-gray-900"></div>
+                  </div>
+                )}
               </th>
               <th
                 className="text-right py-3 px-4 text-sm font-medium text-gray-500 relative cursor-help"

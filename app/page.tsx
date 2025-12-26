@@ -9,6 +9,7 @@ import {
   MetricSelector,
   TimeSeriesChart,
   FunnelChart,
+  ConversionRates,
   InsightsPanel,
   ComparativeChart,
   TrendAnalysisTable,
@@ -193,6 +194,13 @@ export default function AnalyticsDashboard() {
           {/* Distribution Chart */}
           {analytics && <DistributionChart analytics={analytics} />}
         </div>
+
+        {/* Conversion Rates */}
+        {funnelData.length > 0 && (
+          <div className="mb-6">
+            <ConversionRates data={funnelData} />
+          </div>
+        )}
 
         {/* Comparative Analysis Chart */}
         {chartData.length > 0 && (
