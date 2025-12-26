@@ -8,35 +8,37 @@ A comprehensive analytics platform to visualize time series trends of AIESEC Exc
 
 ## Features
 
-### Core Visualizations
+### Dashboard Components
 
-- **Time Series Charts**: Interactive line, area, and bar charts showing trends over time
-- **Exchange Funnel**: Visual representation of the exchange pipeline from applications to completion
-- **Distribution Chart**: Donut chart showing application status distribution
-- **Comparative Analysis**: Combined chart showing volumes and conversion rates
+- **Metric Cards**: Summary cards displaying key totals for each exchange stage with period-over-period change indicators
+- **Key Insights Panel**: Auto-generated insights with equations including conversion rates, completion rates, match rates, and trend analysis
+- **Metric Selector**: Interactive toggle buttons to select which metrics to display on the time series chart
+- **Time Series Chart**: Multi-line/area chart showing trends over time with custom legend featuring colored dots
+- **Exchange Funnel**: Horizontal bar chart visualizing the exchange pipeline stages
+- **Stage Conversion Rates**: Dedicated section showing conversion percentages between consecutive stages with hover tooltips displaying formulas
+- **Application Status Distribution**: Donut/pie chart showing status breakdown with consistent colored-dot legend
+- **Comparative Analysis Chart**: Combined bar and line chart showing application volumes alongside conversion rates (Match Rate, Acceptance Rate, Realization Rate)
+- **Trend Analysis Summary Table**: Tabular view of all metrics with trend indicators, percent change, average, peak, and low values - each column header has tooltip equations
 
-### Advanced Analytics
+### Analytics Features
 
-- **Trend Analysis**: Automatic detection of increasing/decreasing/stable trends
-- **Key Insights**: AI-generated insights including:
-  - Conversion rates (Application → Realized)
-  - Completion rates
-  - Match rates
-  - Approval to realization conversion
-  - Engagement rates
-- **Peak Performance Detection**: Identifies best performing periods
+- **Trend Detection**: Automatic classification of trends as increasing, decreasing, or stable
+- **Conversion Rate Calculations**: Stage-to-stage conversion percentages with formula tooltips
+- **Peak Performance Tracking**: Identifies highest and lowest performing periods for each metric
+- **Period Comparison**: Compares recent vs previous period averages to calculate percent changes
 
-### Metrics Tracked
+### Metrics Tracked (in funnel order)
 
-- Total Applications
-- Matched Applications
-- Approvals
-- AN Accepted
-- Realized Exchanges
-- Finished Exchanges
-- Completed Exchanges
-- Remote Realized
-- Sign-ups
+1. **Sign-ups** - Total number of new sign-ups
+2. **Matched** - Applications that have been matched with opportunities
+3. **Applications** - Total number of applications submitted
+4. **Accepted by Host** - Applications accepted by host organization
+5. **Approvals** - Applications that have been approved
+6. **Realized** - Exchanges that have started
+7. **Finished** - Exchanges that have been finished
+8. **Completed** - Exchanges completed successfully
+
+_Remote Realized is also tracked separately_
 
 ## Getting Started
 
@@ -94,35 +96,47 @@ https://analytics.api.aiesec.org/v2/applications/analyze.json
 app/
 ├── api/
 │   └── analytics/
-│       └── route.ts          # API proxy route
+│       └── route.ts           # API proxy route
 ├── components/
-│   ├── FilterPanel.tsx       # Filter controls
-│   ├── MetricCards.tsx       # Summary metric cards
-│   ├── MetricSelector.tsx    # Metric toggle buttons
-│   ├── TimeSeriesChart.tsx   # Main time series visualization
-│   ├── FunnelChart.tsx       # Exchange funnel
-│   ├── DistributionChart.tsx # Status distribution
-│   ├── ComparativeChart.tsx  # Volume vs rates analysis
-│   ├── TrendAnalysisTable.tsx# Trend summary table
-│   └── InsightsPanel.tsx     # AI-generated insights
+│   ├── FilterPanel.tsx        # Filter controls (date range, interval, office)
+│   ├── MetricCards.tsx        # Summary metric cards with change indicators
+│   ├── MetricSelector.tsx     # Metric toggle buttons for chart selection
+│   ├── TimeSeriesChart.tsx    # Main time series visualization
+│   ├── FunnelChart.tsx        # Exchange funnel bar chart
+│   ├── ConversionRates.tsx    # Stage-to-stage conversion rates section
+│   ├── DistributionChart.tsx  # Status distribution pie chart
+│   ├── ComparativeChart.tsx   # Volume vs rates combined analysis
+│   ├── TrendAnalysisTable.tsx # Trend summary table with tooltips
+│   ├── InsightsPanel.tsx      # Auto-generated key insights
+│   └── index.ts               # Component exports
 ├── lib/
-│   ├── constants.ts          # Configuration constants
-│   └── analytics-utils.ts    # Data transformation utilities
+│   ├── constants.ts           # Metric configs & demo data
+│   └── analytics-utils.ts     # Data transformation & calculations
 ├── types/
-│   └── analytics.ts          # TypeScript type definitions
-├── globals.css               # Global styles
-├── layout.tsx                # Root layout
-└── page.tsx                  # Main dashboard page
+│   └── analytics.ts           # TypeScript type definitions
+├── icon.svg                   # Custom favicon (blue chart icon)
+├── globals.css                # Global styles
+├── layout.tsx                 # Root layout
+└── page.tsx                   # Main dashboard page
 ```
 
 ## Technologies Used
 
 - **Next.js 16** - React framework with App Router
-- **TypeScript** - Type safety
-- **Tailwind CSS 4** - Styling
-- **Recharts** - Chart library
+- **TypeScript 5** - Type safety
+- **Tailwind CSS 4** - Utility-first styling
+- **Recharts** - Chart library (LineChart, AreaChart, BarChart, PieChart, ComposedChart)
 - **date-fns** - Date utilities
-- **Lucide React** - Icons
+- **Lucide React** - Icon library
+
+## UI Design
+
+- **Light theme** with cream background (#f8f5f1)
+- **Primary color**: AIESEC Blue (#037EF3)
+- **White cards** with subtle shadows and rounded corners (3xl)
+- **Consistent legends** with colored dots across all charts
+- **Hover tooltips** showing calculation formulas throughout
+- **Responsive layout** with two-column grid for charts
 
 ## Demo Mode
 
