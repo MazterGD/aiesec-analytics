@@ -39,6 +39,19 @@ export async function GET(request: NextRequest) {
 
     if (!response.ok) {
       const errorText = await response.text();
+      console.error("API Error Response:", response.status, errorText);
+      
+      if (response.status === 401) {
+        return NextResponse.json(
+          { 
+            error: "Authentication failed. Your EXPA access token may be expired or invalid.", 
+            details: "Please get a new access token from EXPA and update your .env file.",
+            status: 401
+          },
+          { status: 401 }
+        );
+      }
+      
       return NextResponse.json(
         { error: `API Error: ${response.status}`, details: errorText },
         { status: response.status }

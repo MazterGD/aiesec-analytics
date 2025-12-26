@@ -65,14 +65,5 @@ export const INTERVAL_OPTIONS = [
   { value: "year", label: "Yearly" },
 ];
 
-export const COMMON_OFFICES = [
-  { id: "1552", name: "AIESEC in Sri Lanka" },
-  { id: "222", name: "AIESEC in India" },
-  { id: "1623", name: "AIESEC in Egypt" },
-  { id: "1585", name: "AIESEC in Colombia" },
-  { id: "1606", name: "AIESEC in Brazil" },
-  { id: "1581", name: "AIESEC in Indonesia" },
-];
-
 export const API_BASE_URL =
   "https://analytics.api.aiesec.org/v2/applications/analyze.json";
