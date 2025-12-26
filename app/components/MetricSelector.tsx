@@ -28,28 +28,22 @@ export default function MetricSelector({
   };
 
   return (
-    <div
-      className="rounded-3xl p-6 mb-6 bg-white"
-      style={{
-        border: "1px solid #e8e4df",
-        boxShadow: "0 4px 20px rgba(0, 0, 0, 0.03)",
-      }}
-    >
+    <div>
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-gray-900">
+        <h4 className="text-sm font-medium text-gray-600">
           Select Metrics to Display
-        </h3>
+        </h4>
         <div className="flex gap-2">
           <button
             onClick={selectAll}
-            className="px-4 py-2 text-sm font-medium rounded-xl transition-colors border border-blue-200 hover:bg-blue-100"
+            className="px-3 py-1.5 text-xs font-medium rounded-lg transition-colors border border-blue-200 hover:bg-blue-100 cursor-pointer"
             style={{ background: "#e0f2fe", color: "#037EF3" }}
           >
             Select All
           </button>
           <button
             onClick={clearAll}
-            className="px-4 py-2 text-sm font-medium rounded-xl transition-colors bg-gray-100 text-gray-600 hover:bg-gray-200"
+            className="px-3 py-1.5 text-xs font-medium rounded-lg transition-colors bg-gray-100 text-gray-600 hover:bg-gray-200 cursor-pointer"
           >
             Clear
           </button>
@@ -64,7 +58,7 @@ export default function MetricSelector({
             <button
               key={metric.key}
               onClick={() => toggleMetric(metric.key)}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-full transition-all duration-200 border-2 hover:scale-105 hover:shadow-md"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-full transition-all duration-200 border-2 hover:scale-105 hover:shadow-md cursor-pointer"
               style={{
                 backgroundColor: isSelected ? `${metric.color}15` : "#f9fafb",
                 borderColor: isSelected ? metric.color : "transparent",

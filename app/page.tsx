@@ -155,20 +155,33 @@ export default function AnalyticsDashboard() {
           </div>
         )}
 
-        {/* Metric Selector */}
-        <MetricSelector
-          selectedMetrics={selectedMetrics}
-          onMetricsChange={setSelectedMetrics}
-        />
+        {/* Metric Selector + Time Series Chart Combined */}
+        {chartData.length > 0 && (
+          <div
+            className="rounded-3xl p-6 mb-6 bg-white"
+            style={{
+              border: "1px solid #e8e4df",
+              boxShadow: "0 4px 20px rgba(0, 0, 0, 0.03)",
+            }}
+          >
+            <h3 className="text-lg font-semibold mb-4 text-gray-900">
+              Exchange Metrics Over Time
+            </h3>
 
-        {/* Main Time Series Chart */}
-        {chartData.length > 0 && selectedMetrics.length > 0 && (
-          <div className="mb-6">
-            <TimeSeriesChart
-              data={chartData}
+            <MetricSelector
               selectedMetrics={selectedMetrics}
-              title="Exchange Metrics Over Time"
+              onMetricsChange={setSelectedMetrics}
             />
+
+            {selectedMetrics.length > 0 && (
+              <div className="mt-6">
+                <TimeSeriesChart
+                  data={chartData}
+                  selectedMetrics={selectedMetrics}
+                  title=""
+                />
+              </div>
+            )}
           </div>
         )}
 

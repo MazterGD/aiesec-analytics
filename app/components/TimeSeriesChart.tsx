@@ -72,6 +72,22 @@ export default function TimeSeriesChart({
     return null;
   };
 
+  const CustomLegend = ({ payload }: any) => {
+    return (
+      <div className="flex flex-wrap justify-center gap-4 mt-4">
+        {payload?.map((entry: any, index: number) => (
+          <div key={index} className="flex items-center gap-2">
+            <div
+              className="w-3 h-3 rounded-full"
+              style={{ backgroundColor: entry.color }}
+            />
+            <span className="text-sm text-gray-600">{entry.value}</span>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
   const renderChart = () => {
     const commonProps = {
       data,
@@ -97,7 +113,7 @@ export default function TimeSeriesChart({
               tickFormatter={(value) => value.toLocaleString()}
             />
             <Tooltip content={<CustomTooltip />} />
-            <Legend />
+            <Legend content={<CustomLegend />} />
             {selectedMetrics.map((metric) => (
               <Area
                 key={metric}
@@ -131,7 +147,7 @@ export default function TimeSeriesChart({
               tickFormatter={(value) => value.toLocaleString()}
             />
             <Tooltip content={<CustomTooltip />} />
-            <Legend />
+            <Legend content={<CustomLegend />} />
             {selectedMetrics.map((metric) => (
               <Bar
                 key={metric}
@@ -162,7 +178,7 @@ export default function TimeSeriesChart({
               tickFormatter={(value) => value.toLocaleString()}
             />
             <Tooltip content={<CustomTooltip />} />
-            <Legend />
+            <Legend content={<CustomLegend />} />
             {selectedMetrics.map((metric) => (
               <Line
                 key={metric}
@@ -180,6 +196,51 @@ export default function TimeSeriesChart({
     }
   };
 
+  // If no title, render without container (for embedding in parent container)
+  if (!title) {
+    return (
+      <div>
+        <div className="flex items-center justify-end mb-4">
+          <div className="flex items-center gap-1 rounded-xl p-1 bg-gray-100">
+            <button
+              onClick={() => setChartType("line")}
+              className={`p-2 rounded-lg transition-colors cursor-pointer ${
+                chartType === "line" ? "bg-white shadow-sm" : ""
+              }`}
+              title="Line Chart"
+            >
+              <LineChartIcon className="w-4 h-4 text-gray-600" />
+            </button>
+            <button
+              onClick={() => setChartType("area")}
+              className={`p-2 rounded-lg transition-colors cursor-pointer ${
+                chartType === "area" ? "bg-white shadow-sm" : ""
+              }`}
+              title="Area Chart"
+            >
+              <AreaChartIcon className="w-4 h-4 text-gray-600" />
+            </button>
+            <button
+              onClick={() => setChartType("bar")}
+              className={`p-2 rounded-lg transition-colors cursor-pointer ${
+                chartType === "bar" ? "bg-white shadow-sm" : ""
+              }`}
+              title="Bar Chart"
+            >
+              <BarChart3 className="w-4 h-4 text-gray-600" />
+            </button>
+          </div>
+        </div>
+
+        <div className="h-80">
+          <ResponsiveContainer width="100%" height="100%">
+            {renderChart()}
+          </ResponsiveContainer>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       className="rounded-3xl p-6 bg-white"
@@ -193,7 +254,7 @@ export default function TimeSeriesChart({
         <div className="flex items-center gap-1 rounded-xl p-1 bg-gray-100">
           <button
             onClick={() => setChartType("line")}
-            className={`p-2 rounded-lg transition-colors ${
+            className={`p-2 rounded-lg transition-colors cursor-pointer ${
               chartType === "line" ? "bg-white shadow-sm" : ""
             }`}
             title="Line Chart"
@@ -202,7 +263,7 @@ export default function TimeSeriesChart({
           </button>
           <button
             onClick={() => setChartType("area")}
-            className={`p-2 rounded-lg transition-colors ${
+            className={`p-2 rounded-lg transition-colors cursor-pointer ${
               chartType === "area" ? "bg-white shadow-sm" : ""
             }`}
             title="Area Chart"
@@ -211,7 +272,7 @@ export default function TimeSeriesChart({
           </button>
           <button
             onClick={() => setChartType("bar")}
-            className={`p-2 rounded-lg transition-colors ${
+            className={`p-2 rounded-lg transition-colors cursor-pointer ${
               chartType === "bar" ? "bg-white shadow-sm" : ""
             }`}
             title="Bar Chart"

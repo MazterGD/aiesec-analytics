@@ -10,7 +10,6 @@ import {
   Minus,
   ArrowUpRight,
   ArrowDownRight,
-  Calculator,
 } from "lucide-react";
 
 interface TrendAnalysisTableProps {
@@ -18,7 +17,7 @@ interface TrendAnalysisTableProps {
 }
 
 export default function TrendAnalysisTable({ data }: TrendAnalysisTableProps) {
-  const [hoveredRow, setHoveredRow] = useState<string | null>(null);
+  const [hoveredHeader, setHoveredHeader] = useState<string | null>(null);
 
   const trends = METRIC_CONFIGS.map((metric) => ({
     ...metric,
@@ -43,8 +42,15 @@ export default function TrendAnalysisTable({ data }: TrendAnalysisTableProps) {
       case "decreasing":
         return { bg: "#fef2f2", text: "#dc2626" };
       default:
-        return { bg: "var(--surface-warm)", text: "var(--text-muted)" };
+        return { bg: "#f3f4f6", text: "#6b7280" };
     }
+  };
+
+  const HEADER_EQUATIONS: Record<string, string> = {
+    change: "((Recent Avg - Previous Avg) ÷ Previous Avg) × 100",
+    average: "Sum of all values ÷ Number of periods",
+    peak: "Maximum value in the selected time range",
+    low: "Minimum value in the selected time range",
   };
 
   return (
@@ -69,17 +75,77 @@ export default function TrendAnalysisTable({ data }: TrendAnalysisTableProps) {
               <th className="text-center py-3 px-4 text-sm font-medium text-gray-500">
                 Trend
               </th>
-              <th className="text-right py-3 px-4 text-sm font-medium text-gray-500">
-                Change
+              <th
+                className="text-right py-3 px-4 text-sm font-medium text-gray-500 relative cursor-help"
+                onMouseEnter={() => setHoveredHeader("change")}
+                onMouseLeave={() => setHoveredHeader(null)}
+              >
+                <span className="border-b border-dashed border-gray-400">
+                  Change
+                </span>
+                {hoveredHeader === "change" && (
+                  <div className="absolute right-0 top-full mt-1 z-10 bg-gray-900 text-white text-xs rounded-lg px-3 py-2 whitespace-nowrap shadow-lg">
+                    
+                    <div className="text-gray-300 font-normal">
+                      {HEADER_EQUATIONS.change}
+                    </div>
+                    <div className="absolute bottom-full right-4 border-4 border-transparent border-b-gray-900"></div>
+                  </div>
+                )}
               </th>
-              <th className="text-right py-3 px-4 text-sm font-medium text-gray-500">
-                Average
+              <th
+                className="text-right py-3 px-4 text-sm font-medium text-gray-500 relative cursor-help"
+                onMouseEnter={() => setHoveredHeader("average")}
+                onMouseLeave={() => setHoveredHeader(null)}
+              >
+                <span className="border-b border-dashed border-gray-400">
+                  Average
+                </span>
+                {hoveredHeader === "average" && (
+                  <div className="absolute right-0 top-full mt-1 z-10 bg-gray-900 text-white text-xs rounded-lg px-3 py-2 whitespace-nowrap shadow-lg">
+                    
+                    <div className="text-gray-300 font-normal">
+                      {HEADER_EQUATIONS.average}
+                    </div>
+                    <div className="absolute bottom-full right-4 border-4 border-transparent border-b-gray-900"></div>
+                  </div>
+                )}
               </th>
-              <th className="text-right py-3 px-4 text-sm font-medium text-gray-500">
-                Peak
+              <th
+                className="text-right py-3 px-4 text-sm font-medium text-gray-500 relative cursor-help"
+                onMouseEnter={() => setHoveredHeader("peak")}
+                onMouseLeave={() => setHoveredHeader(null)}
+              >
+                <span className="border-b border-dashed border-gray-400">
+                  Peak
+                </span>
+                {hoveredHeader === "peak" && (
+                  <div className="absolute right-0 top-full mt-1 z-10 bg-gray-900 text-white text-xs rounded-lg px-3 py-2 whitespace-nowrap shadow-lg">
+                    
+                    <div className="text-gray-300 font-normal">
+                      {HEADER_EQUATIONS.peak}
+                    </div>
+                    <div className="absolute bottom-full right-4 border-4 border-transparent border-b-gray-900"></div>
+                  </div>
+                )}
               </th>
-              <th className="text-right py-3 px-4 text-sm font-medium text-gray-500">
-                Low
+              <th
+                className="text-right py-3 px-4 text-sm font-medium text-gray-500 relative cursor-help"
+                onMouseEnter={() => setHoveredHeader("low")}
+                onMouseLeave={() => setHoveredHeader(null)}
+              >
+                <span className="border-b border-dashed border-gray-400">
+                  Low
+                </span>
+                {hoveredHeader === "low" && (
+                  <div className="absolute right-0 top-full mt-1 z-10 bg-gray-900 text-white text-xs rounded-lg px-3 py-2 whitespace-nowrap shadow-lg">
+                    
+                    <div className="text-gray-300 font-normal">
+                      {HEADER_EQUATIONS.low}
+                    </div>
+                    <div className="absolute bottom-full right-4 border-4 border-transparent border-b-gray-900"></div>
+                  </div>
+                )}
               </th>
             </tr>
           </thead>
@@ -90,18 +156,12 @@ export default function TrendAnalysisTable({ data }: TrendAnalysisTableProps) {
                 <tr
                   key={item.key}
                   className="transition-all duration-200 border-b border-gray-100 hover:bg-blue-50"
-                  onMouseEnter={() => setHoveredRow(item.key)}
-                  onMouseLeave={() => setHoveredRow(null)}
                 >
                   <td className="py-3 px-4">
                     <div className="flex items-center gap-2">
                       <div
-                        className="w-3 h-3 rounded-full transition-transform duration-200"
-                        style={{
-                          backgroundColor: item.color,
-                          transform:
-                            hoveredRow === item.key ? "scale(1.3)" : "scale(1)",
-                        }}
+                        className="w-3 h-3 rounded-full"
+                        style={{ backgroundColor: item.color }}
                       />
                       <span className="text-sm font-medium text-gray-900">
                         {item.label}
@@ -111,7 +171,7 @@ export default function TrendAnalysisTable({ data }: TrendAnalysisTableProps) {
                   <td className="py-3 px-4">
                     <div className="flex justify-center">
                       <span
-                        className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium transition-transform duration-200 hover:scale-105"
+                        className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium"
                         style={{
                           background: trendStyles.bg,
                           color: trendStyles.text,
@@ -123,7 +183,7 @@ export default function TrendAnalysisTable({ data }: TrendAnalysisTableProps) {
                       </span>
                     </div>
                   </td>
-                  <td className="py-3 px-4 text-right relative">
+                  <td className="py-3 px-4 text-right">
                     <span
                       className={`inline-flex items-center gap-1 text-sm font-medium ${
                         item.analysis!.percentChange > 0
@@ -132,7 +192,6 @@ export default function TrendAnalysisTable({ data }: TrendAnalysisTableProps) {
                           ? "text-red-600"
                           : "text-gray-500"
                       }`}
-                      title={`Change % = ((Recent Avg - Previous Avg) ÷ Previous Avg) × 100`}
                     >
                       {item.analysis!.percentChange > 0 && (
                         <ArrowUpRight className="w-3 h-3" />
@@ -143,22 +202,8 @@ export default function TrendAnalysisTable({ data }: TrendAnalysisTableProps) {
                       {item.analysis!.percentChange > 0 ? "+" : ""}
                       {item.analysis!.percentChange}%
                     </span>
-                    {hoveredRow === item.key && (
-                      <div className="absolute right-0 top-full mt-1 z-10 bg-gray-900 text-white text-xs rounded-lg px-3 py-2 whitespace-nowrap shadow-lg">
-                        <div className="flex items-center gap-1 mb-1">
-                          <Calculator className="w-3 h-3" />
-                          <span className="font-medium">Formula</span>
-                        </div>
-                        <div className="text-gray-300">
-                          ((Recent - Previous) ÷ Previous) × 100
-                        </div>
-                      </div>
-                    )}
                   </td>
-                  <td
-                    className="py-3 px-4 text-right text-sm text-gray-900"
-                    title="Average value over the period"
-                  >
+                  <td className="py-3 px-4 text-right text-sm text-gray-900">
                     {item.analysis!.average.toLocaleString()}
                   </td>
                   <td className="py-3 px-4 text-right">

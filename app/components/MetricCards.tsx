@@ -62,7 +62,7 @@ export default function MetricCards({ analytics }: MetricCardsProps) {
   ];
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3 mb-6">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-6">
       {mainMetrics.map((metricKey) => {
         const config = METRIC_CONFIGS.find((m) => m.key === metricKey);
         const metricData =
@@ -77,7 +77,7 @@ export default function MetricCards({ analytics }: MetricCardsProps) {
         return (
           <div
             key={metricKey}
-            className="group rounded-2xl p-4 transition-all duration-300 hover:translate-y-[-4px] hover:shadow-xl bg-white"
+            className="group rounded-2xl p-5 transition-all duration-300 hover:translate-y-[-4px] hover:shadow-xl bg-white"
             style={{
               border: "1px solid #e8e4df",
               boxShadow: "0 4px 20px rgba(0, 0, 0, 0.03)",
@@ -94,7 +94,7 @@ export default function MetricCards({ analytics }: MetricCardsProps) {
                 </span>
               </div>
               <div
-                className={`flex items-center gap-1 text-sm font-medium px-2.5 py-1 rounded-full ${
+                className={`flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-full ${
                   trend === "up"
                     ? "text-green-600 bg-green-100"
                     : trend === "down"
@@ -102,17 +102,19 @@ export default function MetricCards({ analytics }: MetricCardsProps) {
                     : "text-gray-500 bg-gray-100"
                 }`}
               >
-                {trend === "up" && <TrendingUp className="w-3.5 h-3.5" />}
-                {trend === "down" && <TrendingDown className="w-3.5 h-3.5" />}
-                {trend === "stable" && <Minus className="w-3.5 h-3.5" />}
+                {trend === "up" && <TrendingUp className="w-3 h-3" />}
+                {trend === "down" && <TrendingDown className="w-3 h-3" />}
+                {trend === "stable" && <Minus className="w-3 h-3" />}
                 {change !== 0 && `${change > 0 ? "+" : ""}${change}%`}
               </div>
             </div>
 
-            <h3 className="text-3xl font-bold tracking-tight text-gray-900">
+            <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900">
               {metricData.doc_count.toLocaleString()}
             </h3>
-            <p className="text-sm mt-1 text-gray-500">{config.label}</p>
+            <p className="text-sm mt-1 text-gray-500 font-medium">
+              {config.label}
+            </p>
           </div>
         );
       })}
