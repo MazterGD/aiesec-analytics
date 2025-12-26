@@ -74,39 +74,41 @@ export default function MetricCards({ analytics }: MetricCardsProps) {
         return (
           <div
             key={metricKey}
-            className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-5 hover:shadow-xl transition-shadow"
+            className="rounded-3xl p-5 transition-all hover:translate-y-[-2px] bg-white"
+            style={{
+              border: "1px solid #e8e4df",
+              boxShadow: "0 4px 20px rgba(0, 0, 0, 0.03)",
+            }}
           >
             <div className="flex items-center justify-between mb-3">
               <div
-                className="p-2 rounded-lg"
-                style={{ backgroundColor: `${config.color}20` }}
+                className="p-2.5 rounded-xl"
+                style={{ backgroundColor: `${config.color}15` }}
               >
                 <span style={{ color: config.color }}>
                   {getMetricIcon(metricKey)}
                 </span>
               </div>
               <div
-                className={`flex items-center gap-1 text-sm font-medium ${
+                className={`flex items-center gap-1 text-sm font-medium px-2.5 py-1 rounded-full ${
                   trend === "up"
-                    ? "text-green-600"
+                    ? "text-green-600 bg-green-100"
                     : trend === "down"
-                    ? "text-red-600"
-                    : "text-gray-500"
+                    ? "text-red-600 bg-red-100"
+                    : "text-gray-500 bg-gray-100"
                 }`}
               >
-                {trend === "up" && <TrendingUp className="w-4 h-4" />}
-                {trend === "down" && <TrendingDown className="w-4 h-4" />}
-                {trend === "stable" && <Minus className="w-4 h-4" />}
+                {trend === "up" && <TrendingUp className="w-3.5 h-3.5" />}
+                {trend === "down" && <TrendingDown className="w-3.5 h-3.5" />}
+                {trend === "stable" && <Minus className="w-3.5 h-3.5" />}
                 {change !== 0 && `${change > 0 ? "+" : ""}${change}%`}
               </div>
             </div>
 
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+            <h3 className="text-3xl font-bold tracking-tight text-gray-900">
               {metricData.doc_count.toLocaleString()}
             </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-              {config.label}
-            </p>
+            <p className="text-sm mt-1 text-gray-500">{config.label}</p>
           </div>
         );
       })}

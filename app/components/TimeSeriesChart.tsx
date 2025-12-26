@@ -47,20 +47,21 @@ export default function TimeSeriesChart({
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-3">
-          <p className="font-medium text-gray-900 dark:text-white mb-2">
-            {label}
-          </p>
+        <div
+          className="rounded-xl shadow-lg p-3 bg-white"
+          style={{ border: "1px solid #e8e4df" }}
+        >
+          <p className="font-medium mb-2 text-gray-900">{label}</p>
           {payload.map((entry: any, index: number) => (
             <div key={index} className="flex items-center gap-2 text-sm">
               <div
                 className="w-3 h-3 rounded-full"
                 style={{ backgroundColor: entry.color }}
               />
-              <span className="text-gray-600 dark:text-gray-400">
+              <span className="text-gray-500">
                 {getMetricLabel(entry.dataKey)}:
               </span>
-              <span className="font-medium text-gray-900 dark:text-white">
+              <span className="font-medium text-gray-900">
                 {entry.value.toLocaleString()}
               </span>
             </div>
@@ -180,44 +181,42 @@ export default function TimeSeriesChart({
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+    <div
+      className="rounded-3xl p-6 bg-white"
+      style={{
+        border: "1px solid #e8e4df",
+        boxShadow: "0 4px 20px rgba(0, 0, 0, 0.03)",
+      }}
+    >
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-          {title}
-        </h3>
-        <div className="flex items-center gap-1 bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
+        <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
+        <div className="flex items-center gap-1 rounded-xl p-1 bg-gray-100">
           <button
             onClick={() => setChartType("line")}
-            className={`p-2 rounded-md transition-colors ${
-              chartType === "line"
-                ? "bg-white dark:bg-gray-600 shadow-sm"
-                : "hover:bg-gray-200 dark:hover:bg-gray-600"
+            className={`p-2 rounded-lg transition-colors ${
+              chartType === "line" ? "bg-white shadow-sm" : ""
             }`}
             title="Line Chart"
           >
-            <LineChartIcon className="w-4 h-4 text-gray-700 dark:text-gray-300" />
+            <LineChartIcon className="w-4 h-4 text-gray-600" />
           </button>
           <button
             onClick={() => setChartType("area")}
-            className={`p-2 rounded-md transition-colors ${
-              chartType === "area"
-                ? "bg-white dark:bg-gray-600 shadow-sm"
-                : "hover:bg-gray-200 dark:hover:bg-gray-600"
+            className={`p-2 rounded-lg transition-colors ${
+              chartType === "area" ? "bg-white shadow-sm" : ""
             }`}
             title="Area Chart"
           >
-            <AreaChartIcon className="w-4 h-4 text-gray-700 dark:text-gray-300" />
+            <AreaChartIcon className="w-4 h-4 text-gray-600" />
           </button>
           <button
             onClick={() => setChartType("bar")}
-            className={`p-2 rounded-md transition-colors ${
-              chartType === "bar"
-                ? "bg-white dark:bg-gray-600 shadow-sm"
-                : "hover:bg-gray-200 dark:hover:bg-gray-600"
+            className={`p-2 rounded-lg transition-colors ${
+              chartType === "bar" ? "bg-white shadow-sm" : ""
             }`}
             title="Bar Chart"
           >
-            <BarChart3 className="w-4 h-4 text-gray-700 dark:text-gray-300" />
+            <BarChart3 className="w-4 h-4 text-gray-600" />
           </button>
         </div>
       </div>

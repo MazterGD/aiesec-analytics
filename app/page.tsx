@@ -264,29 +264,35 @@ export default function AnalyticsDashboard() {
   const funnelData = analytics ? calculateFunnelData(analytics) : [];
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      {/* Header */}
-      <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+    <div className="min-h-screen" style={{ background: "#f8f5f1" }}>
+      {/* Header - Dark themed like reference */}
+      <header className="sticky top-0 z-50" style={{ background: "#1a1a2e" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-blue-600 rounded-lg">
+            <div className="flex items-center gap-4">
+              <div
+                className="p-3 rounded-2xl"
+                style={{ background: "#037EF3" }}
+              >
                 <BarChart3 className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900 dark:text-white">
-                  AIESEC Exchange Analytics
+                <h1 className="text-xl font-semibold tracking-tight text-white">
+                  AIESEC Analytics
                 </h1>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  Time Series Trends & Performance Insights
+                <p className="text-sm text-gray-400">
+                  Exchange Performance Dashboard
                 </p>
               </div>
             </div>
 
             {isUsingDemoData && (
-              <div className="flex items-center gap-2 px-3 py-1.5 bg-amber-100 dark:bg-amber-900/30 rounded-full">
-                <AlertCircle className="w-4 h-4 text-amber-600 dark:text-amber-400" />
-                <span className="text-sm font-medium text-amber-700 dark:text-amber-300">
+              <div
+                className="flex items-center gap-2 px-4 py-2 rounded-full border border-gray-600"
+                style={{ background: "transparent" }}
+              >
+                <AlertCircle className="w-4 h-4 text-gray-400" />
+                <span className="text-sm font-medium text-gray-300">
                   Demo Data
                 </span>
               </div>
@@ -295,12 +301,15 @@ export default function AnalyticsDashboard() {
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Error Alert */}
         {error && (
-          <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg flex items-center gap-3">
-            <AlertCircle className="w-5 h-5 text-red-500" />
-            <span className="text-red-700 dark:text-red-300">{error}</span>
+          <div
+            className="mb-6 p-4 rounded-2xl flex items-center gap-3"
+            style={{ background: "#fef2f2", border: "1px solid #fecaca" }}
+          >
+            <AlertCircle className="w-5 h-5" style={{ color: "#dc2626" }} />
+            <span style={{ color: "#991b1b" }}>{error}</span>
           </div>
         )}
 
@@ -363,8 +372,8 @@ export default function AnalyticsDashboard() {
         )}
 
         {/* Footer */}
-        <footer className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
-          <p>
+        <footer className="mt-12 py-6 text-center border-t border-gray-200">
+          <p className="text-sm text-gray-500">
             Data source: AIESEC GIS Analytics API •
             {isUsingDemoData ? " Showing demo data" : " Live data"}
           </p>

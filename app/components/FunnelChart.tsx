@@ -29,15 +29,16 @@ export default function FunnelChart({ data }: FunnelChartProps) {
         maxValue > 0 ? ((item.value / maxValue) * 100).toFixed(1) : 0;
 
       return (
-        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-3">
-          <p className="font-medium text-gray-900 dark:text-white">
-            {item.stage}
-          </p>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+        <div
+          className="rounded-xl shadow-lg p-3 bg-white"
+          style={{ border: "1px solid #e8e4df" }}
+        >
+          <p className="font-medium text-gray-900">{item.stage}</p>
+          <p className="text-sm text-gray-500">
             Count:{" "}
             <span className="font-medium">{item.value.toLocaleString()}</span>
           </p>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+          <p className="text-sm text-gray-500">
             Ratio: <span className="font-medium">{percentage}%</span>
           </p>
         </div>
@@ -47,8 +48,14 @@ export default function FunnelChart({ data }: FunnelChartProps) {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+    <div
+      className="rounded-3xl p-6 bg-white"
+      style={{
+        border: "1px solid #e8e4df",
+        boxShadow: "0 4px 20px rgba(0, 0, 0, 0.03)",
+      }}
+    >
+      <h3 className="text-lg font-semibold mb-4 text-gray-900">
         Exchange Funnel
       </h3>
 
@@ -100,10 +107,10 @@ export default function FunnelChart({ data }: FunnelChartProps) {
           return (
             <div
               key={item.stage}
-              className="text-center p-2 rounded-lg"
-              style={{ backgroundColor: `${item.color}10` }}
+              className="text-center p-3 rounded-xl"
+              style={{ backgroundColor: `${item.color}15` }}
             >
-              <p className="text-xs text-gray-500 dark:text-gray-400">
+              <p className="text-xs text-gray-500">
                 {data[index].stage} → {item.stage}
               </p>
               <p

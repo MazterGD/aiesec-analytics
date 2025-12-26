@@ -25,15 +25,21 @@ export default function FilterPanel({
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-6">
-      <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+    <div
+      className="rounded-3xl p-6 mb-6 bg-white"
+      style={{
+        border: "1px solid #e8e4df",
+        boxShadow: "0 4px 20px rgba(0, 0, 0, 0.03)",
+      }}
+    >
+      <h2 className="text-lg font-semibold mb-4 text-gray-900">
         Filter Parameters
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Start Date */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label className="block text-sm font-medium mb-2 text-gray-500">
             Start Date
           </label>
           <div className="relative">
@@ -41,14 +47,14 @@ export default function FilterPanel({
               type="date"
               value={filters.startDate}
               onChange={(e) => updateFilter("startDate", e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 rounded-xl text-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 border border-gray-200 text-gray-900"
             />
           </div>
         </div>
 
         {/* End Date */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label className="block text-sm font-medium mb-2 text-gray-500">
             End Date
           </label>
           <div className="relative">
@@ -56,14 +62,14 @@ export default function FilterPanel({
               type="date"
               value={filters.endDate}
               onChange={(e) => updateFilter("endDate", e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 rounded-xl text-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 border border-gray-200 text-gray-900"
             />
           </div>
         </div>
 
         {/* Interval */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label className="block text-sm font-medium mb-2 text-gray-500">
             Interval
           </label>
           <select
@@ -74,7 +80,7 @@ export default function FilterPanel({
                 e.target.value as FilterParams["interval"]
               )
             }
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-3 rounded-xl text-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer bg-gray-50 border border-gray-200 text-gray-900"
           >
             {INTERVAL_OPTIONS.map((option) => (
               <option key={option.value} value={option.value}>
@@ -89,7 +95,8 @@ export default function FilterPanel({
           <button
             onClick={onApply}
             disabled={isLoading}
-            className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium rounded-lg transition-colors flex items-center justify-center gap-2"
+            className="w-full px-6 py-3 font-medium rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-60 text-white hover:opacity-90"
+            style={{ background: "#037EF3" }}
           >
             {isLoading ? (
               <>

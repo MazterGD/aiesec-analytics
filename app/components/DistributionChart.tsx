@@ -72,15 +72,16 @@ export default function DistributionChart({
           : 0;
 
       return (
-        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-3">
-          <p className="font-medium text-gray-900 dark:text-white">
-            {item.name}
-          </p>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+        <div
+          className="rounded-xl shadow-lg p-3 bg-white"
+          style={{ border: "1px solid #e8e4df" }}
+        >
+          <p className="font-medium text-gray-900">{item.name}</p>
+          <p className="text-sm text-gray-500">
             Count:{" "}
             <span className="font-medium">{item.value.toLocaleString()}</span>
           </p>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+          <p className="text-sm text-gray-500">
             Share: <span className="font-medium">{percentage}%</span>
           </p>
         </div>
@@ -119,8 +120,14 @@ export default function DistributionChart({
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+    <div
+      className="rounded-3xl p-6 bg-white"
+      style={{
+        border: "1px solid #e8e4df",
+        boxShadow: "0 4px 20px rgba(0, 0, 0, 0.03)",
+      }}
+    >
+      <h3 className="text-lg font-semibold mb-4 text-gray-900">
         Application Status Distribution
       </h3>
 
@@ -149,9 +156,7 @@ export default function DistributionChart({
               verticalAlign="bottom"
               align="center"
               formatter={(value) => (
-                <span className="text-sm text-gray-700 dark:text-gray-300">
-                  {value}
-                </span>
+                <span className="text-sm text-gray-600">{value}</span>
               )}
             />
           </PieChart>

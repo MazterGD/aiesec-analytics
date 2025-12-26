@@ -47,10 +47,11 @@ export default function ComparativeChart({ data }: ComparativeChartProps) {
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-4">
-          <p className="font-medium text-gray-900 dark:text-white mb-3">
-            {label}
-          </p>
+        <div
+          className="rounded-xl shadow-lg p-4 bg-white"
+          style={{ border: "1px solid #e8e4df" }}
+        >
+          <p className="font-medium mb-3 text-gray-900">{label}</p>
 
           <div className="space-y-2">
             <div className="text-sm">
@@ -78,7 +79,7 @@ export default function ComparativeChart({ data }: ComparativeChartProps) {
               </span>
             </div>
 
-            <hr className="border-gray-200 dark:border-gray-700 my-2" />
+            <hr className="my-2 border-gray-200" />
 
             <div className="text-sm">
               <span className="text-gray-500">Match Rate: </span>
@@ -104,8 +105,14 @@ export default function ComparativeChart({ data }: ComparativeChartProps) {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+    <div
+      className="rounded-3xl p-6 bg-white"
+      style={{
+        border: "1px solid #e8e4df",
+        boxShadow: "0 4px 20px rgba(0, 0, 0, 0.03)",
+      }}
+    >
+      <h3 className="text-lg font-semibold mb-4 text-gray-900">
         Applications vs Conversions Analysis
       </h3>
 
